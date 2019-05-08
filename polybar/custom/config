@@ -1,0 +1,176 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;==========================================================
+
+;=============================
+;           Icons
+;=============================
+
+;====== FONTAWESOME 4 =======
+; Sound on - 
+; Charging - 
+; ramp-capacity-0 - 
+; ramp-capacity-1 - 
+; ramp-capacity-2 - 
+; ramp-capacity-3 - 
+; ramp-capacity-4 - 
+; CPU - 
+; memory - 
+; wifi - 
+; filesystem - 
+
+;=== FURAMONO FOR POWERLINE ===
+; Sound off - 
+
+;=============================
+;           COLORS
+;=============================
+
+[colors]
+navy = #2d5b6b
+white = #f0fff0
+red = #ff6666
+
+;=============================
+;           GLOBAL
+;=============================
+
+[global/wm]
+margin-bottom = 0
+margin-top = 0
+
+;=============================
+;             BAR
+;=============================
+
+[bar/top]
+font-0 = SF Pro Display:style=Regular;2
+font-1 = FontAwesome:style=Regular;2
+font-2 = FontAwesome:style=Regular:size=10;3
+font-3 = FuraMonoForPowerline Nerd Font:style=Regular:size=20;4
+
+monitor = LVDS-1
+monitor-strict = false
+
+width = 100%
+height = 20
+radius = 0
+padding-right = 2
+fixed-center = true
+
+background = ${colors.navy}
+foreground = ${colors.white}
+
+modules-left = i3
+modules-center = xwindow
+modules-right = fs cpu memory volume battery nm-launcher date
+
+separator = " | "
+
+;=============================
+;           MODULES
+;=============================
+
+[module/i3]
+type = internal/i3
+format = <label-state><label-mode>
+
+index-sort = true
+enable-click = true 
+enable-scroll = false
+pin-workspaces = true
+
+
+label-mode = %mode%
+
+
+label-focused = %index%
+label-focused-padding = 2
+label-focused-foreground = ${colors.navy}
+label-focused-background = ${colors.white}
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+label-urgent = %index%
+label-urgent-padding = 2
+label-urgent-foreground = ${colors.white}
+label-urgent-background = ${colors.red}
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:20:...%  %{B- -o -u}
+
+[module/fs]
+type = internal/fs
+fixed-values = true
+
+mount-0 = /
+
+label-mounted = %{T3}%{T-} %percentage_used%%
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+label = %{T3}%{T-} %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 1
+
+label = %{T3}%{T-} %gb_used%/%gb_total%
+
+[module/volume]
+type = internal/alsa
+
+cursor-click = pointer
+
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+ 
+label-muted =  muted
+
+format-volume =  <label-volume>
+format-muted = <label-muted>
+
+[module/battery]
+type = internal/battery
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-charging = <ramp-capacity> <label-charging>
+
+label-charging =  %percentage%%
+label-discharging = %percentage%%
+
+[module/nm-launcher]
+type = custom/text
+content = ""
+click-left = nm-connection-editor
+
+[module/date]
+type = internal/date
+interval = 1.0
+
+date = %H:%M:%S %d-%m-%Y

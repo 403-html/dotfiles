@@ -1,0 +1,17 @@
+[options]
+allow_bold = true
+clickable_url = true
+cursor_blink = system
+cursor_shape = block
+font = SF Mono Regular 10
+modify_other_keys = false
+mouse_autohide = false
+scroll_on_output = false
+scroll_on_keystroke = true
+scrollback_lines = 15000
+search_wrap = true
+highlight = #30343e
+
+[colors]
+background = #2d5b6b
+foreground = #f0fff0
